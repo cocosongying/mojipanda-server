@@ -1,0 +1,27 @@
+{
+  "name": "mojipanda-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocosongying/mojipanda-server.git"
+  },
+  "author": "cocosongying",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cocosongying/mojipanda-server/issues"
+  },
+  "homepage": "https://github.com/cocosongying/mojipanda-server#readme",
+  "dependencies": {
+    "koa": "^2.8.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  }
+}
