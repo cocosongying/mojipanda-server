@@ -1,10 +1,11 @@
+const ApiReturnUtil = require('../../util/apiReturnUtil');
+
 class helloWorld {
     async content(ctx) {
-        let data = {};
-        ctx.body = {
-            code: 0,
-            data: data
+        let data = { 
+            content: "Hello World!"
         };
+        ctx.body = await ApiReturnUtil.ok(data);
     }
 }
 
