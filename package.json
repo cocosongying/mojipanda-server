@@ -20,9 +20,14 @@
   },
   "homepage": "https://github.com/cocosongying/mojipanda-server#readme",
   "dependencies": {
+    "cls-hooked": "^4.2.2",
     "koa": "^2.8.2",
     "koa-bodyparser": "^4.2.1",
     "koa-cors": "0.0.16",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.9.13",
+    "mysql2": "^2.1.0",
+    "redis": "^3.0.2",
+    "uuid": "^8.0.0"
   }
 }

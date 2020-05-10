@@ -1,6 +1,9 @@
-const router = require('koa-router')();
-const HelloWorldCtrl = require('../controller/hello/helloWorld');
+const HelloWorld = require('../controller/helloWorld');
 
-router.get('/hello', HelloWorldCtrl.content);
+const hello = [
+    ["/hello", HelloWorld.content],
+];
 
-module.exports = router;
+module.exports = [
+    [hello, "/hello"],
+];
