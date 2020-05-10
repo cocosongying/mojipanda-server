@@ -3,7 +3,7 @@ const path = require('path');
 const util = require('util')
 const context = require('../context');
 const File = require('./file');
-const LogLevel = require('../../const/logLevel');
+const LogLevel = require('../../const/loglevel');
 
 var filePrefix = "";
 var logtime;

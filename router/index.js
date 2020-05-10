@@ -1,4 +1,4 @@
-const HelloWorld = require('../controller/helloWorld');
+const HelloWorld = require('../controller/helloworld');
 
 const hello = [
     ["/hello", HelloWorld.content],

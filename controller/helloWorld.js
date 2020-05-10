@@ -1,4 +1,4 @@
-const ApiReturn = require('../common/util/apiReturn');
+const ApiReturn = require('../common/util/api_return');
 
 class HelloWorld {
     async content(params) {
