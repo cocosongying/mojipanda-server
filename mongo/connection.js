@@ -7,15 +7,14 @@ mongoose.Promise = global.Promise;
 function getOptions() {
     return {
         useCreateIndex: true,
-        useMongoClient: true,
         useNewUrlParser: true,
         useFindAndModify: false,
-        useUnifiedTopology: true,
-        reconnectTries: Number.MAX_VALUE
+        useUnifiedTopology: true
     };
 }
 
-const client = mongoose.createConnection(config.mongo.url, getOptions());
+mongoose.connect(config.mongo.url, getOptions());
+const client = mongoose.connection;
 client.on('connected', () => { log.debug("mongo connected") });
 client.on('reconnected', () => { log.debug("mongo reconnected") });
 client.on('disconnected', () => { log.debug("mongo disconnected") });
