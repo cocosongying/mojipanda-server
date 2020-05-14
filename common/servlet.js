@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const cors = require('koa2-cors');
 const BodyParser = require('koa-bodyparser');
 const { v4: uuidv4 } = require('uuid');
 const log = require('./util/log')(__filename);
@@ -17,6 +18,7 @@ async function deal(ctx, next) {
 // 初始化接口方法
 function init(methods) {
     let app = new Koa();
+    app.use(cors());
     app.use(deal);
     let router = new Router();
     app.use(BodyParser({ jsonLimit: '2mb' }));
