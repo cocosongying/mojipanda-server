@@ -1,6 +1,6 @@
 const { client } = require('./connection');
 const { getFields } = require('../common/util/strs');
-const fields = ['username', 'nickname', 'description', 'avatar', 'role',
+const fields = ['id', 'username', 'nickname', 'description', 'avatar', 'role',
     'active', 'menu', 'createTime', 'updateTime', 'lastLogin'];
 
 async function add(info) {
