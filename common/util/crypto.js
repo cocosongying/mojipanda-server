@@ -13,7 +13,7 @@ class CryptoUtil {
         return res.toString();
     }
 
-    static hmacSHA256(data, key) {
+    static hmacSHA1(data, key) {
         let res = CryptoJs.HmacSHA1(data, key || HMACSHA1_KEY);
         return res.toString();
     }

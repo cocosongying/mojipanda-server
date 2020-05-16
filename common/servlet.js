@@ -47,7 +47,14 @@ function get(method, options) {
         let requestId = request.__mojiRequestId__;
         try {
             let param = request.query;
+            param.mojiToken = request.mojiToken;
             log.info("%s %s GETDATA %s", requestId, request.path, JSON.stringify(param));
+            if (options) {
+                let { roles } = options;
+                if (!checkRole(roles, param.mojiToken, response, requestId, ctx)) {
+                    return;
+                }
+            }
             context.set('path', request.path);
             context.set('reqId', requestId);
             param.__mojiRequestId__ = requestId;
@@ -80,7 +87,14 @@ function post(method, options) {
         let requestId = request.__mojiRequestId__;
         try {
             let param = request.type === "multipart/form-data" ? ctx.req.body : request.body;
+            param.mojiToken = request.mojiToken;
             log.info("%s %s POSTDATA %s", requestId, request.path, JSON.stringify(param));
+            if (options) {
+                let { roles } = options;
+                if (!checkRole(roles, param.mojiToken, response, requestId, ctx)) {
+                    return;
+                }
+            }
             context.set('path', request.path);
             context.set('reqId', requestId);
             param.__mojiRequestId__ = requestId;
@@ -99,10 +113,14 @@ function post(method, options) {
 }
 
 // 给接口分配 get 和 post 请求
-function getpost(router, path, method, opt) {
-    if (!opt) {
+function getpost(router, path, method, options) {
+    if (!options) {
         router.get(path, get(method));
         router.post(path, post(method));
+        return;
+    } else {
+        router.get(path, get(method));
+        router.post(path, post(method, options));
     }
 }
 
@@ -116,11 +134,28 @@ function json2String(result, requestId) {
     return JSON.stringify(result);
 }
 
+// 检查角色权限
+function checkRole(roles, token, response, requestId, ctx) {
+    let role = token.role
+    if (!roles.some(r => r == role)) {
+        log.warn(`%s ${role} is not allowed`, requestId);
+        ctx.set('Content-Type', 'application/json');
+        let result = {
+            code: StatusCode.ROLE_ERR,
+            requestId,
+            responseTime: Date.now()
+        }
+        response.body = json2String(result, requestId);
+        return false;
+    }
+    return true;
+}
+
 // 处理异常的返回
 function dealErr(ctx, response, error, requestId) {
     log.error("%s error with stack info '%s'", requestId, error.stack)
     let result = {
-        code: StatusCode.ERR,
+        code: StatusCode.INTERNAL_ERR,
         error: error.message || error.stack,
         requestId,
         requestTime: Date.now()
