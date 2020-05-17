@@ -76,7 +76,7 @@ class User {
             start: params.pageStart || 0,
             size: params.pageSize || 10
         }
-        let items = ["id", "username", "nickname", "role"];
+        let items = ["id", "username", "nickname", "role", "active", "lastLogin"];
         let res = await UserInfoDB.list(opts, items);
         return res;
     }
@@ -90,28 +90,29 @@ class User {
         let userInfo = {
             updateTime: now,
         }
-        if (params.nickname) {
+        if (params.nickname !== undefined) {
             userInfo.nickname = params.nickname;
         }
-        if (params.description) {
+        if (params.description !== undefined) {
             userInfo.description = params.description;
         }
-        if (params.avatar) {
+        if (params.avatar !== undefined) {
             userInfo.avatar = params.avatar;
         }
-        if (params.menu && mojiToken.role == UserAttr.Role.Admin) {
+        if (params.menu !== undefined) {
             userInfo.menu = params.menu;
+        }
+        if (params.active !== undefined) {
+            userInfo.active = params.active ? 1 : 0;
         }
         await UserInfoDB.updateById(id, userInfo);
         await UserCache.delInfo(id);
     }
     async add(params) {
         let now = Date.now();
-        let password = CryptoUtil.aesDecrypt(params.password);
-        password = CryptoUtil.hmacSHA1(password);
         let userInfo = {
             username: params.username,
-            password: password,
+            password: CryptoUtil.hmacSHA1("123456"),
             nickname: params.nickname,
             description: params.description,
             avatar: params.avatar,

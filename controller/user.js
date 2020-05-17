@@ -49,8 +49,17 @@ class User {
         } else if (mojiToken.role == UserAttr.Role.Admin && id == undefined) {
             id = mojiToken.userId;
         }
-        params.id = id;
-        await UserService.updateById(params);
+        let info = {
+            id: id,
+            nickname: params.nickname,
+            description: params.description,
+            avatar: params.avatar
+        }
+        if (mojiToken.role == UserAttr.Role.Admin) {
+            info.menu = params.menu;
+            info.active = params.active;
+        }
+        await UserService.updateById(info);
         return ApiReturn.success();
     }
     async resetPasswd(params) {
