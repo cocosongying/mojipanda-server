@@ -1,7 +1,7 @@
 const UserAttr = {
     Role: {
         Admin: 9,
-        Guest: 0,
+        Guest: 2,
         Normal: 1,
     },
     State: {
