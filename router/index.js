@@ -13,7 +13,9 @@ const user = [
     ["/list", User.list, { roles: [Role.Admin] }],
     ["/getById", User.getById],
     ["/add", User.add, { roles: [Role.Admin] }],
-    ["/updateById", User.updateById, { roles: [Role.Admin, Role.Normal] }]
+    ["/updateById", User.updateById, { roles: [Role.Admin, Role.Normal] }],
+    ["/resetPasswd", User.resetPasswd, { roles: [Role.Admin] }],
+    ["/modifyPasswd", User.modifyPasswd, { roles: [Role.Admin, Role.Normal] }],
 ];
 
 module.exports = [

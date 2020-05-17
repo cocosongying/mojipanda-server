@@ -81,32 +81,26 @@ class User {
         return res;
     }
     async getById(params) {
-        let { mojiToken, id } = params;
-        if (mojiToken.role != UserAttr.Role.Admin) {
-            id = mojiToken.userId;
-        } else if (mojiToken.role == UserAttr.Role.Admin && id == undefined) {
-            id = mojiToken.userId;
-        }
-        params.id = id;
         let res = await UserCache.getInfoById(findById, params);
         return res;
     }
     async updateById(params) {
-        let { mojiToken, id } = params;
-        if (mojiToken.role == UserAttr.Role.Normal) {
-            id = mojiToken.userId;
-        } else if (mojiToken.role == UserAttr.Role.Admin && id == undefined) {
-            id = mojiToken.userId;
-        }
+        let { id } = params;
         let now = Date.now();
         let userInfo = {
-            username: params.username,
-            nickname: params.nickname,
-            description: params.description,
-            avatar: params.avatar,
-            active: params.active,
-            menu: params.menu,
             updateTime: now,
+        }
+        if (params.nickname) {
+            userInfo.nickname = params.nickname;
+        }
+        if (params.description) {
+            userInfo.description = params.description;
+        }
+        if (params.avatar) {
+            userInfo.avatar = params.avatar;
+        }
+        if (params.menu && mojiToken.role == UserAttr.Role.Admin) {
+            userInfo.menu = params.menu;
         }
         await UserInfoDB.updateById(id, userInfo);
         await UserCache.delInfo(id);
@@ -129,6 +123,15 @@ class User {
             lastLogin: 0,
         }
         await UserInfoDB.add(userInfo);
+    }
+    async modifyPasswd(params) {
+        let { id, password } = params;
+        let now = Date.now();
+        let info = {
+            password: CryptoUtil.hmacSHA1(password),
+            updateTime: now
+        }
+        await UserInfoDB.updateById(id, info);
     }
 }
 
