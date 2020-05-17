@@ -11,5 +11,6 @@ CREATE TABLE `user_info` (
   `createTime` bigint DEFAULT NULL COMMENT '创建时间',
   `updateTime` bigint DEFAULT NULL COMMENT '修改时间',
   `lastLogin` bigint DEFAULT NULL COMMENT '上次登录',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
