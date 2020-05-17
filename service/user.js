@@ -81,6 +81,13 @@ class User {
         return res;
     }
     async getById(params) {
+        let { mojiToken, id } = params;
+        if (mojiToken.role != UserAttr.Role.Admin) {
+            id = mojiToken.userId;
+        } else if (mojiToken.role == UserAttr.Role.Admin && id == undefined) {
+            id = mojiToken.userId;
+        }
+        params.id = id;
         let res = await UserCache.getInfoById(findById, params);
         return res;
     }

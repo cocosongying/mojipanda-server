@@ -11,7 +11,10 @@ async function checkToken(params, request, response) {
     }
     // 根据 token 获取信息
     let tokenInfo = await TokenCache.getInfoByToken(token);
-    request.mojiToken = tokenInfo || {};
+    if (!tokenInfo) {
+        return false;
+    }
+    request.mojiToken = tokenInfo;
     return true;
 }
 
