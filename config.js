@@ -11,5 +11,5 @@ const initVal = {
     }
 }
 // 外部配置文件地址
-const conf = "/conf/api.js";
+const conf = "/Users/songying/conf/api.js";
 module.exports = require('./common/util/config')(initVal, conf);

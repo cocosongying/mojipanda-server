@@ -25,14 +25,14 @@ async function findById(id, cols) {
 }
 
 async function count() {
-    let sql = `select count(1) as total from user_info where active = 1`;
+    let sql = `select count(1) as total from user_info where 1 = 1`;
     let res = await client.query(sql);
     return res[0][0].total;
 }
 
 async function list(opts, cols) {
     let { start, size } = opts;
-    let sql = `select ?? from user_info where 1=1 order by active desc limit ?,?`;
+    let sql = `select ?? from user_info where 1 = 1 order by active desc limit ?,?`;
     let args = [getFields(cols, fields), start, size];
     let res = await client.query(sql, args);
     return res[0];
