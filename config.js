@@ -3,13 +3,8 @@ const initVal = {
     port: 2001,
     log: {
         dir: 'logs/node'
-    },
-    redis: {
-        host: 'localhost',
-        password: '123456',
-        db: 1,
     }
 }
 // 外部配置文件地址
-const conf = "/Users/songying/conf/api.js";
+const conf = "/mojipanda/conf/api.js";
 module.exports = require('./common/util/config')(initVal, conf);
