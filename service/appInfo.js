@@ -5,17 +5,20 @@ class AppInfo {
         let opts = {
             start: params.pageStart || 0,
             size: params.pageSize || 20,
-            name : params.name
+            name: params.name
         }
         let res = await AppVersion.getAll(opts);
         return res;
     }
-    async count() {
-        let total = await AppVersion.count();
+    async count(params) {
+        let opts = {
+            name: params.name
+        }
+        let total = await AppVersion.count(opts);
         return total;
     }
     async getById(params) {
-        let {id} = params;
+        let { id } = params;
         let res = await AppVersion.findById(id);
         return res;
     }

@@ -3,17 +3,19 @@ const { getFields } = require('../common/util/strs');
 const fields = ['id', 'name', 'version', 'description', 'createTime'];
 
 async function add(info) {
-    let {} = info;
-    let args = [];
+    let { name, version, description, createTime } = info;
+    let args = [name, version, description, createTime];
     let sql = `insert into app_version(name, version, description, createTime)
         values (?,?,?,?)`;
     let res = await client.query(sql, args);
     return res[0];
 }
 
-async function count() {
-    let sql = `select count(1) as total from app_version`;
-    let res = await client.query(sql);
+async function count(opts) {
+    let { name } = opts;
+    let sql = `select count(1) as total from app_version where name = ?`;
+    let args = [name];
+    let res = await client.query(sql, args);
     return res[0][0].total;
 }
 

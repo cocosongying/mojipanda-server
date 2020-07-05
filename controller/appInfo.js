@@ -4,7 +4,7 @@ const AppInfoService = require('../service/appInfo');
 
 class AppInfo {
     async getListByName(params) {
-        let total = await AppInfoService.count();
+        let total = await AppInfoService.count(params);
         let list = await AppInfoService.getListByName(params);
         let data = {
             total: total,
