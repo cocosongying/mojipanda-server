@@ -13,4 +13,4 @@ CREATE TABLE `user_info` (
   `lastLogin` bigint DEFAULT NULL COMMENT '上次登录',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户信息';

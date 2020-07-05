@@ -1,7 +1,7 @@
 const CryptoUtil = require('../common/util/crypto');
 const RandomUtil = require('../common/util/random');
 const UserAttr = require('../const/userattr');
-const UserInfoDB = require('../mysql/user');
+const UserInfoDB = require('../mysql/userInfo');
 const TokenCache = require('../cache/token');
 const UserCache = require('../cache/user');
 
