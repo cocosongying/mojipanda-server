@@ -35,9 +35,17 @@ async function findById(id, cols) {
     return res[0][0];
 }
 
+async function findByName(name, cols) {
+    let sql = `select ?? from app_version where name = ?`;
+    let args = [getFields(cols, fields), name];
+    let res = await client.query(sql, args);
+    return res[0][0];
+}
+
 module.exports = {
     add,
     count,
     getAll,
     findById,
+    findByName,
 };

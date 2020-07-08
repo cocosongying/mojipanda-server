@@ -15,10 +15,12 @@ class AppInfo {
 
     async getById(params) {
         let res = await AppInfoService.getById(params);
-        let data = {
-            appInfo: res
-        }
-        return ApiReturn.success(data);
+        return ApiReturn.success(res);
+    }
+
+    async getVersionByName(params) {
+        let res = await AppInfoService.getByName(params);
+        return ApiReturn.success(res);
     }
 }
 

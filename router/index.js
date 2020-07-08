@@ -23,6 +23,7 @@ const user = [
 const app = [
     ["/all", AppInfo.getListByName],
     ["/getById", AppInfo.getById],
+    ["/getVersion", AppInfo.getVersionByName],
 ];
 
 module.exports = [

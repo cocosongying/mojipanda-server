@@ -22,6 +22,11 @@ class AppInfo {
         let res = await AppVersion.findById(id);
         return res;
     }
+    async getByName(params) {
+        let { name } = params;
+        let res = await AppVersion.findByName(name);
+        return res;
+    }
 }
 
 module.exports = new AppInfo();
