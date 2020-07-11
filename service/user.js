@@ -29,7 +29,13 @@ class User {
     async check(params) {
         let { username } = params;
         let password = CryptoUtil.aesDecrypt(params.password);
+        if (!password) {
+            return null;
+        }
         password = CryptoUtil.hmacSHA1(password);
+        if (!password) {
+            return null;
+        }
         let opts = {
             username: username,
             password: password

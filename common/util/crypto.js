@@ -4,18 +4,30 @@ const HMACSHA1_KEY = 'vs7oadmveey46exu97';
 
 class CryptoUtil {
     static aesDecrypt(data, key) {
-        let res = CryptoJs.AES.decrypt(data, key || AES_KEY);
-        return res.toString(CryptoJs.enc.Utf8);
+        try {
+            let res = CryptoJs.AES.decrypt(data, key || AES_KEY);
+            return res.toString(CryptoJs.enc.Utf8);
+        } catch (error) {
+            return null;
+        }
     }
 
     static aesEncrypt(data, key) {
-        let res = CryptoJs.AES.encrypt(data, key || AES_KEY);
-        return res.toString();
+        try {
+            let res = CryptoJs.AES.encrypt(data, key || AES_KEY);
+            return res.toString();
+        } catch (error) {
+            return null;
+        }
     }
 
     static hmacSHA1(data, key) {
-        let res = CryptoJs.HmacSHA1(data, key || HMACSHA1_KEY);
-        return res.toString();
+        try {
+            let res = CryptoJs.HmacSHA1(data, key || HMACSHA1_KEY);
+            return res.toString();
+        } catch (error) {
+            return null;
+        }
     }
 }
 
