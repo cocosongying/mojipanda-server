@@ -29,6 +29,15 @@ class CryptoUtil {
             return null;
         }
     }
+
+    static sha1(data) {
+        try {
+            let res = CryptoJs.SHA1(data);
+            return res.toString();
+        } catch (error) {
+            return null;
+        }
+    }
 }
 
 module.exports = CryptoUtil;
