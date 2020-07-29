@@ -22,6 +22,11 @@ class AppInfo {
         let res = await AppInfoService.getByName(params);
         return ApiReturn.success(res);
     }
+
+    async checkVersion(params) {
+        let res = await AppInfoService.check(params);
+        return ApiReturn.success(res);
+    }
 }
 
 module.exports = new AppInfo();

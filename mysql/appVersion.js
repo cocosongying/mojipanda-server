@@ -42,10 +42,20 @@ async function findByName(name, cols) {
     return res[0][0];
 }
 
+async function check(opts) {
+    let { name, version } = opts;
+    let sql = `select max(id) as id, sum(isForce) as isForce from app_version where name = ? and id > 
+        (select ifnull(sum(id), 0) from app_version where name = ? and version = ?)`;
+    let args = [name, name, version];
+    let res = await client.query(sql, args);
+    return res[0][0];
+}
+
 module.exports = {
     add,
     count,
     getAll,
     findById,
     findByName,
+    check,
 };

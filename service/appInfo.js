@@ -27,6 +27,20 @@ class AppInfo {
         let res = await AppVersion.findByName(name);
         return res;
     }
+    async check(params) {
+        let { id, isForce } = await AppVersion.check(params);
+        let res = {};
+        if (isForce != null) {
+            let info = await AppVersion.findById(id);
+            res = {
+                forceUpdate: isForce == 0 ? false : true,
+                version: info.version,
+                description: info.description,
+                downloadUrl: 'public/download/mojipanda-release.apk',
+            }
+        }
+        return res;
+    }
 }
 
 module.exports = new AppInfo();

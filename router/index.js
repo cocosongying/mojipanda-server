@@ -24,6 +24,7 @@ const app = [
     ["/all", AppInfo.getListByName],
     ["/getById", AppInfo.getById],
     ["/getVersion", AppInfo.getVersionByName],
+    ["/checkVersion", AppInfo.checkVersion],
 ];
 
 module.exports = [
