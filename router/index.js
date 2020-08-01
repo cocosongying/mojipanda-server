@@ -2,11 +2,13 @@ const Checker = require('../common/checker');
 const Filter = require('../common/filter');
 const User = require('../controller/user');
 const AppInfo = require('../controller/appInfo');
+const Blog = require('../controller/blog');
 const { Role } = require('../const/userattr');
 
 const filters = [
     ["/user/login", Filter.noCheck],
     ["/app", Filter.noCheck],
+    ["/blog", Filter.noCheck],
     ["/", Filter.checkToken],
 ];
 
@@ -27,8 +29,13 @@ const app = [
     ["/checkVersion", AppInfo.checkVersion],
 ];
 
+const blog = [
+    ["/category", Blog.getCategories],
+];
+
 module.exports = [
     Checker(filters),
     [user, "/user"],
     [app, "/app"],
+    [blog, "/blog"],
 ];
