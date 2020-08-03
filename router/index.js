@@ -31,6 +31,7 @@ const app = [
 
 const blog = [
     ["/category", Blog.getCategories],
+    ["/list", Blog.list],
 ];
 
 module.exports = [
