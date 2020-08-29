@@ -3,6 +3,7 @@ const Filter = require('../common/filter');
 const User = require('../controller/user');
 const AppInfo = require('../controller/appInfo');
 const Blog = require('../controller/blog');
+const Mzitu = require('../controller/mzitu');
 const { Role } = require('../const/userattr');
 
 const filters = [
@@ -34,9 +35,15 @@ const blog = [
     ["/list", Blog.list],
 ];
 
+const mzitu = [
+    ["/list", Mzitu.list, { roles: [Role.Admin] }],
+    ["/grid", Mzitu.grid, { roles: [Role.Admin] }],
+]
+
 module.exports = [
     Checker(filters),
     [user, "/user"],
     [app, "/app"],
     [blog, "/blog"],
+    [mzitu, "/mzitu"],
 ];
