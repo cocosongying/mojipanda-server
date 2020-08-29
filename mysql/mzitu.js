@@ -23,7 +23,7 @@ async function fingByType(opts, cols) {
     let sql = `select ?? from mzitu where parentId = 0 and isDeleted = 0 `;
     let args = [getFields(cols, fields)];
     if (type) {
-        sql += `and type = ?`;
+        sql += `and type = ? `;
         args.push(type);
     }
     sql += `order by createTime desc limit ?,?`;
