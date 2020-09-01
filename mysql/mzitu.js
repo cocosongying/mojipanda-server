@@ -34,7 +34,7 @@ async function fingByType(opts, cols) {
     let { type, start, limit } = opts;
     let sql = `select ?? from mzitu where isDeleted = 0 `;
     let args = [getFields(cols, fields)];
-    if (type) {
+    if (type > 0) {
         sql += `and type = ? `;
         args.push(type);
     }
