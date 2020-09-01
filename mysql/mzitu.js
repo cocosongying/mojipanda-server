@@ -39,7 +39,9 @@ async function fingByType(opts, cols) {
         args.push(type);
     }
     sql += `order by createTime desc limit ?,?`;
-    args.push(parseInt(start), parseInt(limit));
+    start = parseInt(start);
+    limit = parseInt(limit);
+    args.push(start * limit, limit);
     let res = await client.query(sql, args);
     return res[0];
 }
