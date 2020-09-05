@@ -26,6 +26,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.6",
+    "minio": "^7.0.16",
     "mongoose": "^5.9.13",
     "mysql2": "^2.1.0",
     "redis": "^3.0.2",
