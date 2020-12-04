@@ -24,7 +24,7 @@ async function findById(params) {
     }
     return null;
 }
-
+``
 class User {
     async check(params) {
         let { username, password } = params;
@@ -63,10 +63,11 @@ class User {
         }
         let oToken = await TokenCache.getTokenById(id);
         if (oToken) {
-            await TokenCache.delTokenInfo(oToken);
+            token = oToken;
+            // await TokenCache.delTokenInfo(oToken);
         }
-        await TokenCache.setTokenById({ id: id, token: token, timeout: 24 * 60 * 60 });
-        await TokenCache.setTokenInfo({ token: token, info: userInfo, timeout: 24 * 60 * 60 });
+        await TokenCache.setTokenById({ id: id, token: token });
+        await TokenCache.setTokenInfo({ token: token, info: userInfo });
         let updateInfo = {
             lastLogin: now
         }
