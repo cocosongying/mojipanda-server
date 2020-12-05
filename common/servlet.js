@@ -94,7 +94,7 @@ function post(method, options) {
         let response = ctx.response;
         let requestId = request.__mojiRequestId__;
         try {
-            let param = ctx.req.body || request.body;
+            let param = ctx.req.body || request.body || {};
             param.mojiToken = request.mojiToken;
             log.info("%s %s POSTDATA %s", requestId, request.path, JSON.stringify(param));
             if (options) {
