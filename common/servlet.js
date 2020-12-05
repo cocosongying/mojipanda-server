@@ -2,10 +2,12 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const cors = require('koa2-cors');
 const BodyParser = require('koa-bodyparser');
+const KoaBody = require('koa-body');
 const { v4: uuidv4 } = require('uuid');
 const log = require('./util/log')(__filename);
 const context = require('./context');
 const StatusCode = require('../const/statusCode');
+const config = require('../config');
 
 // 对本次请求生成唯一的 requestId
 async function deal(ctx, next) {
@@ -20,6 +22,14 @@ function init(methods) {
     let app = new Koa();
     app.use(cors());
     app.use(deal);
+    app.use(KoaBody({
+        multipart: true,
+        formidable: {
+            maxFileSize: 200 * 1024 * 1024,
+            keepExtensions: true,
+            uploadDir: config.uploadDir
+        }
+    }));
     let router = new Router();
     app.use(BodyParser({ jsonLimit: '2mb' }));
     methods.forEach(method => {
@@ -81,12 +91,10 @@ function post(method, options) {
     return async function (ctx, next) {
         let request = ctx.request;
         request.params = ctx.params;
-        request.files = ctx.req.files;
-        request.file = ctx.req.file;
         let response = ctx.response;
         let requestId = request.__mojiRequestId__;
         try {
-            let param = request.type === "multipart/form-data" ? ctx.req.body : request.body;
+            let param = ctx.req.body || request.body;
             param.mojiToken = request.mojiToken;
             log.info("%s %s POSTDATA %s", requestId, request.path, JSON.stringify(param));
             if (options) {
