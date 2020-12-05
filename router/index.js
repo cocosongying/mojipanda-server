@@ -4,12 +4,14 @@ const User = require('../controller/user');
 const AppInfo = require('../controller/appInfo');
 const Blog = require('../controller/blog');
 const Mzitu = require('../controller/mzitu');
+const Cook = require('../controller/cook');
 const { Role } = require('../const/userattr');
 
 const filters = [
     ["/user/login", Filter.noCheck],
     ["/app", Filter.noCheck],
     ["/blog", Filter.noCheck],
+    ["/cook", Filter.noCheck],
     ["/", Filter.checkToken],
 ];
 
@@ -40,10 +42,19 @@ const mzitu = [
     ["/grid", Mzitu.grid, { roles: [Role.Admin] }],
 ]
 
+const cook = [
+    ["/add", Cook.add],
+    ["/list", Cook.list],
+    ["/detail", Cook.detail],
+    ["/update", Cook.update],
+    ["/delete", Cook.delete],
+]
+
 module.exports = [
     Checker(filters),
     [user, "/user"],
     [app, "/app"],
     [blog, "/blog"],
     [mzitu, "/mzitu"],
+    [cook, "/cook"],
 ];

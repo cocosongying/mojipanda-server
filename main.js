@@ -1,3 +1,4 @@
+require('./mongo/connection');
 const config = require('./config');
 const Log = require('./common/util/log');
 Log.setName(config.log.dir, Log.LogLevel.Debug);
