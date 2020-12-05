@@ -43,7 +43,7 @@ const mzitu = [
 ]
 
 const cook = [
-    ["/add", Cook.add],
+    ["/add", Cook.add, { upload: true}],
     ["/list", Cook.list],
     ["/detail", Cook.detail],
     ["/update", Cook.update],

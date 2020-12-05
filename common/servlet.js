@@ -126,6 +126,8 @@ function getpost(router, path, method, options) {
         router.get(path, get(method));
         router.post(path, post(method));
         return;
+    } else if (typeof options == "object" && options.upload == true) {
+        router.post(path, post(method));
     } else {
         router.get(path, get(method));
         router.post(path, post(method, options));
