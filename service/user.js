@@ -57,14 +57,14 @@ class User {
             description: description,
             menu: menu,
         }
-        let data = {
-            userInfo: userInfo,
-            token: token,
-        }
         let oToken = await TokenCache.getTokenById(id);
         if (oToken) {
             token = oToken;
             // await TokenCache.delTokenInfo(oToken);
+        }
+        let data = {
+            userInfo: userInfo,
+            token: token,
         }
         await TokenCache.setTokenById({ id: id, token: token });
         await TokenCache.setTokenInfo({ token: token, info: userInfo });

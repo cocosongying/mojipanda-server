@@ -48,7 +48,7 @@ async function updateById(id, items) {
 async function check(opts, cols) {
     let { username, password } = opts;
     let sql = `select ?? from user_info
-        where active = 1 and username = ? and password = ?`;
+        where active = 1 and username = ? and password = ? limit 1`;
     let args = [getFields(cols, fields), username, password];
     let res = await client.query(sql, args);
     return res[0][0];
